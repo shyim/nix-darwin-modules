@@ -149,6 +149,9 @@ in {
         export ES_HOME="${cfg.dataDir}"
         export ES_JAVA_OPTS="${toString cfg.extraJavaOptions}"
         export ES_PATH_CONF="${configDir}"
+        export OPENSEARCH_HOME="${cfg.dataDir}"
+        export OPENSEARCH_JAVA_OPTS="${toString cfg.extraJavaOptions}"
+        export OPENSEARCH_PATH_CONF="${configDir}"
 
         mkdir -m 0700 -p ${cfg.dataDir}
 
@@ -162,8 +165,14 @@ in {
 
         # Create config dir
         mkdir -m 0700 -p ${configDir}
-        rm -f ${configDir}/elasticsearch.yml
-        cp ${elasticsearchYml} ${configDir}/elasticsearch.yml
+
+        if [[ -e "${cfg.package}/bin/opensearch" ]]; then
+          rm -f ${configDir}/opensearch.yml
+          cp ${elasticsearchYml} ${configDir}/opensearch.yml
+        else
+          rm -f ${configDir}/elasticsearch.yml
+          cp ${elasticsearchYml} ${configDir}/elasticsearch.yml
+        fi
 
         rm -f "${configDir}/logging.yml"
         rm -f ${configDir}/${loggingConfigFilename}
@@ -177,7 +186,11 @@ in {
         mkdir -m 0700 -p ${cfg.dataDir}/logs
 
         # Start it
-        exec ${cfg.package}/bin/elasticsearch ${toString cfg.extraCmdLineOptions}
+        if [[ -e "${cfg.package}/bin/opensearch" ]]; then
+          exec ${cfg.package}/bin/opensearch ${toString cfg.extraCmdLineOptions}
+        else
+          exec ${cfg.package}/bin/elasticsearch ${toString cfg.extraCmdLineOptions}
+        fi
       '';
       serviceConfig.KeepAlive = true;
       serviceConfig.RunAtLoad = true;
