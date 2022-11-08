@@ -7,5 +7,6 @@
     ./elasticsearch
     ./mysql
     ./php-fpm
+    ./rabbitmq
   ];
 }
