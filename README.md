@@ -155,3 +155,15 @@ services.blackfire.server-id
 # string: Blackfire server token
 services.blackfire.server-token
 ```
+
+## RabbitMQ
+
+Available Options:
+
+See NixOS for all options
+
+```nix
+services.rabbitmq.enable = true;
+services.rabbitmq.managementPlugin.enable = true;
+  
+```
