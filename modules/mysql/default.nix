@@ -103,6 +103,8 @@ in
       [mysql]
       socket = ${cfg.socketFile}
       ${cfg.extraClientOptions}
+      [mysqldump]
+      socket = ${cfg.socketFile}
     '';
 
     launchd.user.agents.mysql =
