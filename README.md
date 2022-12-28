@@ -167,3 +167,27 @@ services.rabbitmq.enable = true;
 services.rabbitmq.managementPlugin.enable = true;
   
 ```
+
+
+## MAS
+
+Allows you to install Mac App Store apps directly using Nix
+
+```nix
+mas.apps = [
+  # iStat Menus
+  "1319778037"
+
+  # The unarchiver
+  "425424353"
+
+  # Slack
+  "803453959"
+
+  # Tailscale
+  "1475387142"
+
+  # Wireguard
+  "1451685025"
+];
+```

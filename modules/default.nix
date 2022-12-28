@@ -8,5 +8,6 @@
     ./mysql
     ./php-fpm
     ./rabbitmq
+    ./mas
   ];
 }
